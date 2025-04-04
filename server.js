@@ -4,7 +4,7 @@ const Tesseract = require('tesseract.js');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors()); // ✅ Allow all origins
 app.use(fileUpload());
 
 app.post('/upload-id', async (req, res) => {
