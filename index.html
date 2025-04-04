@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Paluwagan KYC</title>
+</head>
+<body>
+    <h2>Upload an ID for Verification</h2>
+    <input type="file" id="idImage" accept="image/*">
+    <button onclick="verifyID()">Verify</button>
+    <p id="result"></p>
+
+    <script>
+        async function verifyID() {
+            const fileInput = document.getElementById("idImage");
+            if (fileInput.files.length === 0) {
+                alert("Please upload an ID image.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("idImage", fileInput.files[0]);
+
+            const response = await fetch('http://localhost:3000/upload-id', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            document.getElementById("result").innerText = data.verified ? "✅ ID Verified" : "❌ Verification Failed";
+        }
+    </script>
+</body>
+</html>
