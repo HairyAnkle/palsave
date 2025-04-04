@@ -22,10 +22,11 @@
             const formData = new FormData();
             formData.append("idImage", fileInput.files[0]);
 
-            const response = await fetch('http://localhost:3000/upload-id', {
+            const response = await fetch('https://palsave.onrender.com/upload-id', {
                 method: 'POST',
                 body: formData
             });
+            
 
             const data = await response.json();
             document.getElementById("result").innerText = data.verified ? "✅ ID Verified" : "❌ Verification Failed";
